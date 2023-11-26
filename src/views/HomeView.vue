@@ -2,7 +2,8 @@
   <div class="bg-[FEFFFE] min-h-screen py-10 pt-14 text-black">
     <div class="border-b-[1px] border-black pb-8">
       <div class="text-left px-5 flex justify-between">
-        <i class="fa-solid fa-angle-left fa-2xl"></i>
+        <!-- <i class="fa-solid fa-angle-left fa-2xl"></i> -->
+        <div class=""></div>
         <div class="flex flex-col">
           <div
             class="bg-neutral-600 w-12 h-12 rounded-full absolute top-5 f px-5 py-6 align-top"
@@ -12,7 +13,7 @@
           </div>
           <div class="mt-6 text-xl font-bold absolute pl-1">GPT</div>
         </div>
-        <div class="space-x-8">
+        <div class="space-x-4">
           <router-link to="/call">
             <i class="fa-solid fa-phone fa-xl"></i>
           </router-link>
@@ -29,8 +30,8 @@
         ref="scrollContainer"
       >
         <div class="my-3">
-          <div class="text-sm text-neutral-500">Text Message</div>
-          <div class="text-sm text-neutral-500">Sat, 20th Oct at 11:11 am</div>
+          <div class="text-xs text-neutral-500">Text Message</div>
+          <div class="text-xs text-neutral-500">Sat, 20th Oct at 11:11 am</div>
         </div>
         <div class="" v-for="array in messageArray" :key="array">
           <div class="" v-for="array1 in array" :key="array1">
@@ -39,7 +40,7 @@
               :class="[array1[0] == 'user' ? 'justify-end' : 'justify-start']"
             >
               <div
-                class="max-w-[70%] px-5 py-2 my-1 rounded-2xl text-sm text-start"
+                class="max-w-[70%] px-3 py-2 my-1 rounded-xl text-sm text-start"
                 id="scale-up-center"
                 :class="[
                   array1[0] == 'user'
@@ -54,11 +55,11 @@
         </div>
       </div>
     </div>
-    <div class="fixed bottom-3 flex">
+    <div class="fixed bottom-5 flex">
       <form @submit.prevent="this.send_message()" class="flex">
         <input
           type="text"
-          class="w-[85vw] h-10 rounded-3xl border-2 px-3 py-0.1 border-neutral-400 ml-2 text-base"
+          class="w-[81vw] h-12 rounded-3xl border-2 px-3 py-0.1 border-neutral-400 ml-6 text-base"
           placeholder="Aa"
           v-model="message"
         />
@@ -70,6 +71,10 @@
       </form>
     </div>
   </div>
+
+
+
+  
 </template>
 
 <script>

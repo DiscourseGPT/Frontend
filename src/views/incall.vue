@@ -1,50 +1,69 @@
 <template>
   <div
-    class="min-h-screen bg-[#2D2D2C] w-[100vw] text-white py-10 px-10 backdrop-blur-3xl"
-  >
-    <div class="text-left">
-      <router-link to="/">
+    class="min-h-screen max-h-screen bg-[#2D2D2C] text-white py-10 px-10 -z-10 bg-black bg-gradient-to-br from-[#3b3b39] to-[#111111]">
+    <div
+      class="absolute top-0 left-0 min-w-[100vw] min-h-screen max-w-[100vw] max-h-screen bg-[url('../assets/opeailogo.png')] bg-cover bg-center blur-[12px]"
+      style="
+      z-index: -2
+      background-position:50%;
+      background-size:95%;
+      background-repeat:no-repeat;
+
+      "
+    ></div>
+    <!-- <div class="max-w-[100vw] max-h-screen openai"></div> -->
+    <!-- this div router-link is not working -->
+    <div class="relative z-10" style="">
+      <div class="text-left">
+        <router-link to="/home">
+          <button class="z-1">
+            <i class="fa-solid fa-angle-left fa-2xl"></i>
+          </button>
+        </router-link>
+      </div>
+
+      <div class="z-0">
+        <div class="text-7xl mt-10">GPT</div>
+        <div class="mt-5 text-xl text-neutral-300">Call Duration - 00:11</div>
+      </div>
+      <div class="mt-28 flex px-0 justify-between mx-5 z-0">
+        <div
+          class="h-20 w-20 py-7 rounded-full backdrop-brightness-50"
+          :class="[microphone ? '' : 'bg-neutral-900']"
+        >
+          <button @click="microphone_exchange()">
+            <i v-if="microphone == false" class="fa-solid fa-microphone fa-2xl"></i>
+            <i v-else class="fa-solid fa-microphone-slash fa-2xl"></i>
+          </button>
+        </div>
+        <div class="h-20 w-20 rounded-full py-7 backdrop-brightness-50">
+          <i class="fa-solid fa-bars fa-2xl"></i>
+        </div>
+        <div class="h-20 w-20 py-7 rounded-full backdrop-brightness-50">
+          <i class="fa-solid fa-volume-high fa-2xl"></i>
+        </div>
+      </div>
+      <div class="mt-6 flex px-0 justify-between mx-5 z-0">
+        <div class="h-20 w-20 py-7 rounded-full backdrop-brightness-50">
+          <i class="fa-solid fa-plus fa-2xl"></i>
+        </div>
+        <div class="h-20 w-20 py-7 rounded-full backdrop-brightness-50">
+          <i class="fa-solid fa-record-vinyl fa-2xl"></i>
+        </div>
+        <div class="h-20 w-20 py-7 rounded-full backdrop-brightness-50">
+          <i class="fa-regular fa-comment fa-2xl"></i>
+        </div>
+      </div>
+      <div class="h-20 w-20 rounded-full py-7 mx-auto my-28 bg-red-600 ">
+        <router-link to="/">
         <button>
-          <i class="fa-solid fa-angle-left fa-2xl"></i>
+          <i class="fa-solid fa-phone-slash fa-2xl"></i>
         </button>
       </router-link>
+      </div>
+      <audio controls :src="audioUrl" class="hidden" autoplay></audio>
     </div>
-
-    <div class="">
-      <div class="text-7xl mt-10">GPT</div>
-      <div class="mt-5 text-2xl text-neutral-400">Call Duration - 00:11</div>
-    </div>
-    <div class="mt-16 flex px-0 justify-between mx-5">
-      <div
-        class="h-20 w-20 py-7 rounded-full backdrop-brightness-75"
-        :class="[microphone ? '' : 'bg-red-600']"
-      >
-        <button @click="microphone_exchange()">
-          <i class="fa-solid fa-microphone fa-2xl"></i>
-        </button>
-      </div>
-      <div class="h-20 w-20 rounded-full py-7 backdrop-brightness-75">
-        <i class="fa-solid fa-bars fa-2xl"></i>
-      </div>
-      <div class="h-20 w-20 py-7 rounded-full backdrop-brightness-75">
-        <i class="fa-solid fa-volume-high fa-2xl"></i>
-      </div>
-    </div>
-    <div class="mt-6 flex px-0 justify-between mx-5">
-      <div class="h-20 w-20 py-7 rounded-full backdrop-brightness-75">
-        <i class="fa-solid fa-plus fa-2xl"></i>
-      </div>
-      <div class="h-20 w-20 py-7 rounded-full backdrop-brightness-75">
-        <i class="fa-solid fa-record-vinyl fa-2xl"></i>
-      </div>
-      <div class="h-20 w-20 py-7 rounded-full backdrop-brightness-75">
-        <i class="fa-regular fa-comment fa-2xl"></i>
-      </div>
-    </div>
-    <div class="h-20 w-20 rounded-full py-7 mx-auto my-28 bg-red-600">
-      <i class="fa-solid fa-phone-slash fa-2xl"></i>
-    </div>
-    <audio controls :src="audioUrl" class="hidden" autoplay></audio>
+    <div class="absolute left-[50%] -translate-x-[50%] mx-auto bottom-10  px-5 py-2 rounded-2xl backdrop-brightness-200 text-neutral-200" v-if="microphone==false">Your Mic is muted </div>
   </div>
 </template>
 <script>
@@ -81,10 +100,10 @@ export default {
     },
     microphone_exchange() {
       if (this.microphone == true) {
-        this.stopRecording();
+        // this.stopRecording();
         this.microphone = false;
       } else {
-        this.startRecording();
+        // this.startRecording();
         this.microphone = true;
       }
     },
@@ -156,21 +175,30 @@ export default {
       const formData = new FormData();
       formData.append("audio_file", audioBlob, "audio.mp3");
 
-      axios.post("http://127.0.0.1:8000/api/upload-audio/", formData, {
+      axios
+        .post("http://127.0.0.1:8000/api/upload-audio/", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         })
         .then((response) => {
-          
           console.log("Audio sent successfully:", response.data);
-          this.call_audio()
+          this.call_audio();
         })
         .catch((error) => {
-          
           console.error("Error sending audio:", error);
         });
     },
   },
 };
 </script>
+<!-- <style scoped>
+.openai {
+  background-size: 75%;
+  background-repeat: no-repeat;
+  z-index: -1;
+  background-position: 50% 50%;
+  background-blend-mode: difference;
+  background-: ;
+}
+</style> -->

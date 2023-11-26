@@ -1,12 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AppIncall from '../views/incall.vue'
+import IntroView from '../views/intro.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/',
+    name: 'IntroView',
+    component: IntroView
   },
   {
     path: '/call',

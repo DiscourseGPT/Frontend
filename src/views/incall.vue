@@ -24,7 +24,7 @@
 
       <div class="z-0">
         <div class="text-7xl mt-10">GPT</div>
-        <div class="mt-5 text-xl text-neutral-300">Call Duration - 00:11</div>
+        <div class="mt-5 text-xl text-neutral-300">call ongoing</div>
       </div>
       <div class="mt-28 flex px-0 justify-between mx-5 z-0">
         <div

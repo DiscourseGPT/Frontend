@@ -175,11 +175,9 @@ export default {
 
       const formData = new FormData();
       formData.append("audio_file", audioBlob, "audio.mp3");
-
+      formData.append("language","english")
       axios
-        .post("https://backend-with-rest.prithaklamsal.repl.co/api/upload-audio/",{
-          "language":"english"
-        } ,formData, {
+        .post("https://backend-with-rest.prithaklamsal.repl.co/api/upload-audio/",formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

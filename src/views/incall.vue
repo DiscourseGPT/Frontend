@@ -183,8 +183,7 @@ export default {
           },
         })
         .then((response) => {
-          console.log("Audio sent successfully:", response.data);
-          this.audioChunks = ''
+          console.log("Audio sent successfully:", response.data)
           this.call_audio();
         })
         .catch((error) => {

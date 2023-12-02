@@ -33,7 +33,7 @@
       >
         <div class="my-3">
           <div class="text-xs text-neutral-500">Text Message</div>
-          <div class="text-xs text-neutral-500">Sat, 20th Oct at 11:11 am</div>
+          <div class="text-xs text-neutral-500">Sun, 2nd Dec </div>
         </div>
         <div class="" v-for="array in messageArray" :key="array">
           <div class="" v-for="array1 in array" :key="array1">

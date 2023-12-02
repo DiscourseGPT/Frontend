@@ -68,6 +68,7 @@
 </template>
 <script>
 import axios from "axios";
+
 /* eslint-disable */
 export default {
   name: "AppIncall",
@@ -86,7 +87,7 @@ export default {
   methods: {
     call_audio() {
       axios
-        .get("http://127.0.0.1:8000/api/audio/", { responseType: "arraybuffer" })
+        .get("https://backend-with-rest.prithaklamsal.repl.co/api/audio/", { responseType: "arraybuffer" })
         .then((response) => {
           const audioBlob = new Blob([response.data], { type: "audio/mp3" });
           this.audioUrl = URL.createObjectURL(audioBlob);
@@ -100,10 +101,10 @@ export default {
     },
     microphone_exchange() {
       if (this.microphone == true) {
-        // this.stopRecording();
+        this.stopRecording();
         this.microphone = false;
       } else {
-        // this.startRecording();
+        this.startRecording();
         this.microphone = true;
       }
     },
@@ -176,7 +177,7 @@ export default {
       formData.append("audio_file", audioBlob, "audio.mp3");
 
       axios
-        .post("http://127.0.0.1:8000/api/upload-audio/", formData, {
+        .post("https://backend-with-rest.prithaklamsal.repl.co/api/upload-audio/", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

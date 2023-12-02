@@ -17,8 +17,10 @@
           <router-link to="/call">
             <i class="fa-solid fa-phone fa-xl"></i>
           </router-link>
-
-          <i class="fa-solid fa-circle-info fa-xl"></i>
+          <button @click="switchbutton()">
+            <i class="fa-solid fa-language fa-xl"></i>
+          </button>
+          
         </div>
       </div>
     </div>
@@ -87,15 +89,24 @@ export default {
     return {
       message: "",
       messageArray: [],
+      language:'english',
     };
   },
   mounted() {
     this.getting_message();
   },
   methods: {
+    switchbutton(){
+      if(this.language=='english'){
+        this.language='nepali';
+      }
+      else{
+        this.language = 'english'
+      }
+    },
     async getting_message() {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/chat/", {
+        const response = await axios.get("https://backend-with-rest.prithaklamsal.repl.co/chat/", {
           headers: {
             "Content-Type": "application/json",
           },
@@ -107,8 +118,8 @@ export default {
     },
     async send_message() {
       try {
-        const response = await axios.post("http://127.0.0.1:8000/chat/", {
-          language: "english",
+        const response = await axios.post("https://backend-with-rest.prithaklamsal.repl.co/chat/", {
+          language: this.language,
           message: this.message,
         });
         this.messageArray.push(response.data.chat_history);

@@ -23,8 +23,8 @@
     
     <div class="relative z-20 px-10">
         <div class="text-4xl font-mono text-neutral-300 pt-52 font-bold">DISCOURSE GPT</div>
-        <div class="text-neutral-400">A project by Students</div>
-        <div class="text-xl pt-72 text-neutral-200 font-mono">AI Innovation, Human Imagination</div>
+        <div class="text-neutral-400">AI Innovation, Human Imagination</div>
+        <div class="text-xl pt-72 text-neutral-200 font-mono">A project by Students</div>
     </div>
   </div>
 </template>
